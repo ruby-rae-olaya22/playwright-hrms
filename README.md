@@ -1,7 +1,7 @@
 
 
 playwright
-dotenv
+npm install dotenv --save-dev
 npx playwright init-agents --loop=opencode
 npx playwright init-agents --loop=claude
 npx playwright init-agents --loop=vscode

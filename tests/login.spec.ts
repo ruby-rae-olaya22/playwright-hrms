@@ -17,5 +17,5 @@ test('should login successfully with valid credentials', async ({ page }) => {
     await loginPage.login(process.env.USERNAME_login, process.env.PASSWORD_login);
 
     // Step 3: Check if it worked (The "Assertion").  We check if the URL now says "inventory"
-    await expect(page).toHaveURL(/.*inventory/);
+    await expect(page).toHaveURL(/.*dashboard\/index/);
 });
