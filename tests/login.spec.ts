@@ -22,7 +22,7 @@ test.describe('Positive Scenarios', () => {
     await loginPage.goTo();
     await loginPage.login(VALID_USERNAME, VALID_PASSWORD);
     await expect(page).toHaveURL(DASHBOARD_URL, SLOW_EXPECT_TIMEOUT);
-    
+
     await expect(page).toHaveTitle('OrangeHRM');
     await expect(loginPage.clientBanner).toBeVisible(SLOW_EXPECT_TIMEOUT);
   });
@@ -58,12 +58,20 @@ test.describe('Positive Scenarios', () => {
     await expect(loginPage.resetPasswordHeader).toContainText('Reset Password', SLOW_EXPECT_TIMEOUT);
   });
 
-  test('P-05: "OrangeHRM Inc." link navigates to business website', async ({ page }) => {
+  test('P-05: "OrangeHRM Inc." link navigates to business website', async ({ page, context }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goTo();
+
+    // Wait for the new page to open
+    const pagePromise = context.waitForEvent('page');
     await loginPage.navigateToOrangeHRM();
-    await expect(page).toHaveURL(loginPage.businessWebsiteLink, SLOW_EXPECT_TIMEOUT);
-    await expect(loginPage.businessWebsiteHeader).toContainText('Streamline All Your HR Needs on One', SLOW_EXPECT_TIMEOUT);
+    const newPage = await pagePromise;
+    await newPage.waitForLoadState();
+
+    // Initialize LoginPage with the new page to use its locators
+    const newLoginPage = new LoginPage(newPage);
+    await expect(newPage).toHaveURL(newLoginPage.businessWebsiteLink, SLOW_EXPECT_TIMEOUT);
+    await expect(newLoginPage.businessWebsiteHeader).toContainText('Streamline All Your HR Needs on One', SLOW_EXPECT_TIMEOUT);
   });
 
   test('P-06: Credential hints are displayed on the page', async ({ page }) => {

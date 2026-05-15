@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "playwright-skill": {
+      "source": "testdino-hq/playwright-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "23236cf9fa92f8904d47496b8ab6daa0f775113336a04022415d0cdbc654c3ab"
+    }
+  }
+}

@@ -37,7 +37,7 @@ export class LoginPage {
 
     // Page element locators
     this.forgotPasswordLink = page.locator('.orangehrm-login-forgot-header');
-    this.orangeHRMLink = page.locator('.orangehrm-copyright a');
+    this.orangeHRMLink = page.getByRole('link', { name: 'OrangeHRM, Inc' });
     this.logo = page.locator('.orangehrm-login-branding img');
     this.credentialHints = page.locator('.orangehrm-login-slot');
     this.versionText = page.locator('.orangehrm-copyright-wrapper p').first();
